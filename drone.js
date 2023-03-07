@@ -172,6 +172,7 @@ function updateProjectilePosition(projectile) {
 }
 
 function handleKeyPress(e) {
+  e.preventDefault();
   switch (e.keyCode) {
     case 38:
     case 87:
@@ -219,11 +220,15 @@ function placeDrone() {
       const x = parseInt(values[0].trim());
       const y = parseInt(values[1].trim());
       const facing = values[2].trim().toLowerCase();
-      if (!isNaN(x) && !isNaN(y) && directions.includes(facing)) {
+      const xBetweenRange = x >= 0 && x < 10;
+      const yBetweenrange = y >= 0 && y < 10;
+      if (!isNaN(x) && !isNaN(y) && directions.includes(facing) && xBetweenRange && yBetweenrange) {
         drone.x = x;
         drone.y = y;
         drone.facing = facing;
         drone.rotation = (getDirectionAngle(drone.facing) * Math.PI) / 180;
+      } else {
+        showAlert("Enter command in the format X,Y,F where x and y varies from 0-9 integer and F north, south, east and west", 'info');
       }
     }
   }
@@ -429,16 +434,16 @@ function showAlert(message, type) {
   toast.appendChild(toastBody);
   let container = document.getElementById("toast-container");
   container.appendChild(toast);
-  setTimeout(function () {
+  setTimeout(function() {
     toast.classList.add("show");
   }, 100);
 
-  setTimeout(function () {
+  setTimeout(function() {
     toast.classList.remove("show");
-    setTimeout(function () {
+    setTimeout(function() {
       container.removeChild(toast);
     }, 500);
-  }, 2000);
+  }, 4000);
 }
 
 init();
