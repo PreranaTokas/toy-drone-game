@@ -1,7 +1,7 @@
 #Toy Drone Game
 
 
-Welcome to my Toy Drone Game, a fun and exciting game where you control a toy drone and shoot ghosts.
+Welcome to my Toy Drone Game
 
 
 
